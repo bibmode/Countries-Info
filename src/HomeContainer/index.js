@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
+import FilterBar from "../FilterBar";
 import GridItem from "../GridItem";
 import { Container, Grid, Wrapper } from "./HomeContainer.styles";
 
@@ -17,15 +18,10 @@ const HomeContainer = () => {
       });
   }, []);
 
-  const getAllData = () => {
-    console.log(countries[0]);
-  };
-
   return (
     <Container>
       <Wrapper>
-        <button onClick={() => getAllData()}>show all</button>
-
+        <FilterBar />
         <Grid>
           {!loading ? (
             countries.map((country) => (

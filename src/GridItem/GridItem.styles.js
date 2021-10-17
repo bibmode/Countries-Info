@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100%;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 0.3rem 0.5rem rgba(17, 21, 23, 0.1);
+  box-shadow: 0 0.2rem 0.6rem rgba(17, 21, 23, 0.1);
 
   img {
     width: 100%;
