@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import GridItem from "../GridItem";
 import { Container, Grid, Wrapper } from "./HomeContainer.styles";
@@ -26,7 +27,7 @@ const HomeContainer = () => {
         <button onClick={() => getAllData()}>show all</button>
 
         <Grid>
-          {countries.length !== 0 &&
+          {!loading ? (
             countries.map((country) => (
               <GridItem
                 nation={country.name.common}
@@ -35,7 +36,10 @@ const HomeContainer = () => {
                 region={country.region}
                 capital={country.capital}
               ></GridItem>
-            ))}
+            ))
+          ) : (
+            <CircularProgress className="loadingProgress" />
+          )}
         </Grid>
       </Wrapper>
     </Container>

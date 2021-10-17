@@ -18,4 +18,12 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   grid-gap: 5rem;
   width: 100%;
+  position: relative;
+
+  .loadingProgress {
+    margin-top: 15rem;
+    position: absolute;
+    margin-left: 50%;
+    transform: translateX(50%);
+  }
 `;
