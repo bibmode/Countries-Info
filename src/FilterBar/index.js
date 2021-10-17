@@ -1,10 +1,7 @@
 import { Container, SearchBar } from "./FilterBar.styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
 
 const FilterBar = ({ searchCountry }) => {
-  // const [value, setValue] = useState("");
-
   return (
     <Container>
       <SearchBar>

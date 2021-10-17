@@ -8,6 +8,7 @@ const HomeContainer = () => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState(null);
+  const [errorOccured, setErrorOccured] = useState(false);
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -29,15 +30,23 @@ const HomeContainer = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setLoading(true);
+        if (data.status === 404) throw new Error(`Can't find data`);
+
         setCountries(data);
         setLoading(false);
+        setErrorOccured(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErrorOccured(true);
+        console.log(`${error}`);
       });
   }, [search]);
 
   const searchCountry = (e) => {
     if (e.keyCode === 13) {
       setSearch(e.target.value);
+      setLoading(true);
     }
   };
 
@@ -46,7 +55,8 @@ const HomeContainer = () => {
       <Wrapper>
         <FilterBar searchCountry={searchCountry} />
         <Grid>
-          {!loading ? (
+          {!errorOccured &&
+            !loading &&
             countries.map((country) => (
               <GridItem
                 nation={country.name.common}
@@ -55,10 +65,9 @@ const HomeContainer = () => {
                 region={country.region}
                 capital={country.capital}
               ></GridItem>
-            ))
-          ) : (
-            <CircularProgress className="loadingProgress" />
-          )}
+            ))}
+          {errorOccured && <p>Can't find data</p>}
+          {loading && <CircularProgress className="loadingProgress" />}
         </Grid>
       </Wrapper>
     </Container>
